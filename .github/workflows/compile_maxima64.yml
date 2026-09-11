@@ -29,5 +29,16 @@ jobs:
              mkdir maxima-5.50.0/crosscompile-windows/build
              cd maxima-5.50.0/crosscompile-windows/build
              cmake ..
-             make winkill
-             md5sum winkill
+             make winkill VERBOSE=1
+             ls -l winkill.exe
+             md5sum winkill.exe
+      - name: get maxima installer
+        run: |
+             wget -O maxima-5.50.0-win64.exe https://sourceforge.net/projects/maxima/files/Maxima-Windows/5.50.0-Windows/maxima-5.50.0-win64.exe/download
+             7z x maxima-5.50.0-win64.exe bin/winkill.exe
+             ls -l bin/winkill.exe
+             sha256sum bin/winkill.exe
+      - name: compare compiled winkill.exe and that from the installer
+        run: |
+             diff bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe
+             cmp --verbose bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe
