@@ -17,6 +17,7 @@ jobs:
         run: |
              sudo dpkg --add-architecture i386
              sudo apt-get update
+             sudo apt-get -y upgrade
              sudo apt-get install g++-mingw-w64-x86-64 cmake nsis automake rsync p7zip-full g++ gettext python3 tcl libgcc-s1:i386 libstdc++6:i386 bsdutils wget mingw-w64-tools wine
       - name: configure compiler
         run: |
