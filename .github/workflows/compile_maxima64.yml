@@ -1,0 +1,33 @@
+name: winkill_test
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+permissions:
+  contents: read
+
+jobs:
+  compile_latest:
+    runs-on: ubuntu-26.04
+
+    steps:
+      - name: install_packages
+        run: |
+             sudo dpkg --add-architecture i386
+             sudo apt-get update
+             sudo apt-get install g++-mingw-w64-x86-64 cmake nsis automake rsync p7zip-full g++ gettext python3 tcl libgcc-s1:i386 libstdc++6:i386 bsdutils wget mingw-w64-tools
+      - name: configure compiler
+        run: |
+             sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
+             sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
+      - name: checkout maxima
+        run: |
+             wget https://sourceforge.net/projects/maxima/files/Maxima-source/5.50.0-source/maxima-5.50.0.tar.gz/download -o maxima-5.50.0.tar.gz
+             tar xvf maxima-5.50.0.tar.gz
+             mkdir maxima-5.50.0/crosscompile-windows/build
+             cd maxima-5.50.0/crosscompile-windows/build
+             cmake ..
+             make winkill
+             md5sum winkill
