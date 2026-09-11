@@ -28,7 +28,7 @@ jobs:
              tar xvf maxima-5.50.0.tar.gz
              mkdir maxima-5.50.0/crosscompile-windows/build
              cd maxima-5.50.0/crosscompile-windows/build
-             cmake -DCMAKE_BUILD_TYPE=Release ..
+             cmake ..
              make winkill VERBOSE=1
              ls -l winkill.exe
              md5sum winkill.exe
