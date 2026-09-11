@@ -24,7 +24,7 @@ jobs:
              sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
       - name: checkout maxima
         run: |
-             wget https://sourceforge.net/projects/maxima/files/Maxima-source/5.50.0-source/maxima-5.50.0.tar.gz/download -o maxima-5.50.0.tar.gz
+             wget -O maxima-5.50.0.tar.gz https://sourceforge.net/projects/maxima/files/Maxima-source/5.50.0-source/maxima-5.50.0.tar.gz/download
              tar xvf maxima-5.50.0.tar.gz
              mkdir maxima-5.50.0/crosscompile-windows/build
              cd maxima-5.50.0/crosscompile-windows/build
