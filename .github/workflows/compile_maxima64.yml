@@ -40,5 +40,8 @@ jobs:
              sha256sum bin/winkill.exe
       - name: compare compiled winkill.exe and that from the installer
         run: |
-             diff bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe
+             # show the sizes of the file from the installer and the self compiled file (winkill.exe).
+             ls -l bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe
+             diff bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe || true
+             # which bytes are really different?
              cmp --verbose bin/winkill.exe maxima-5.50.0/crosscompile-windows/build/winkill.exe
